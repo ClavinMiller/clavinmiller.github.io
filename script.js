@@ -1,4 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Shared social links are injected once so every page stays consistent.
+  const socialRail = document.createElement("aside");
+  socialRail.className = "social-rail";
+  socialRail.setAttribute("aria-label", "Social links");
+  socialRail.innerHTML = `
+    <span class="social-rail-label">Elsewhere</span>
+    <a href="https://github.com/ClavinMiller" target="_blank" rel="noreferrer" aria-label="GitHub profile">GH</a>
+    <a href="https://www.instagram.com/YUNHE1957" target="_blank" rel="noreferrer" aria-label="Instagram profile">IG</a>
+  `;
+  document.body.appendChild(socialRail);
+
+  // Replace the original footer placeholder with the real profile URL.
+  document.querySelectorAll('.footer-links a[href*="github.com/your-username"]').forEach((link) => {
+    link.setAttribute("href", "https://github.com/ClavinMiller");
+  });
+
   const menuButton = document.querySelector(".menu-toggle");
   const navigation = document.querySelector(".site-nav");
 
@@ -51,14 +67,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // Notes category filter.
   const filters = document.querySelectorAll("[data-filter]");
   const notes = document.querySelectorAll("[data-category]");
+  const noteCount = document.querySelector("[data-note-count]");
   filters.forEach((button) => {
     button.addEventListener("click", () => {
       filters.forEach((item) => item.classList.remove("is-active"));
       button.classList.add("is-active");
       const selected = button.dataset.filter;
+      let visibleCount = 0;
       notes.forEach((note) => {
-        note.hidden = selected !== "all" && note.dataset.category !== selected;
+        const isVisible = selected === "all" || note.dataset.category === selected;
+        note.hidden = !isVisible;
+        if (isVisible) visibleCount += 1;
       });
+      if (noteCount) noteCount.textContent = String(visibleCount);
     });
   });
 });
