@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="二自由度云台视觉追踪系统项目记录。"><title>Pan-Tilt Visual Tracking — Calvin Miller</title><link rel="stylesheet" href="../style.css"><script src="../script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a><header class="site-header"><div class="container nav-wrap"><a class="brand" href="../index.html"><span class="brand-mark">CM.</span><span class="brand-cn">雲何</span></a><button class="menu-toggle" type="button" aria-label="打开导航" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" aria-label="主导航"><a href="../index.html">Home</a><a href="../projects.html">Projects</a><a href="../notes.html">Notes</a><a href="../gallery.html">Gallery</a><a href="../interests.html">Interests</a><a href="../about.html">About</a></nav></div></header>
+  <main id="main">
+    <header class="project-hero"><div class="container"><a class="back-link" href="../projects.html">← Back to projects</a><p class="eyebrow">P — 02 / Robotics & Vision</p><h1>Pan-Tilt Visual Tracking System</h1><p class="project-summary">使用摄像头估计目标位置，通过控制器驱动二自由度云台，使目标持续保持在画面中心。</p><div class="project-specs"><div class="spec"><span>Status</span><strong>In progress</strong></div><div class="spec"><span>Year</span><strong>2026</strong></div><div class="spec"><span>Role</span><strong>System Integration</strong></div><div class="spec"><span>Stack</span><strong>OpenCV · PID · Servo</strong></div></div></div></header>
+    <div class="container project-body"><aside class="project-toc"><p>On this page</p><a href="#background">项目背景</a><a href="#environment">硬件 / 软件</a><a href="#process">实现过程</a><a href="#problems">问题与方案</a><a href="#media">图像 / 视频</a><a href="#next">后续计划</a></aside>
+      <article>
+        <section class="content-block" id="background"><h2>项目背景</h2><p>视觉追踪把感知算法与物理执行器直接连接起来，是一个结构紧凑但问题完整的机器人系统。项目目标是建立从图像采集、目标检测、误差计算到云台控制的实时闭环，并观察时延、机械间隙和控制参数怎样共同影响稳定性。</p></section>
+        <section class="content-block" id="environment"><h2>硬件 / 软件环境</h2><table class="tech-table"><tr><th>Mechanism</th><td>Pan / Tilt 二自由度支架 + 两路舵机</td></tr><tr><th>Vision</th><td>USB / CSI 摄像头（具体型号待替换）</td></tr><tr><th>Compute</th><td>PC / edge board + MCU control node</td></tr><tr><th>Software</th><td>Python · OpenCV · serial communication</td></tr><tr><th>Control</th><td>Deadband + PID / proportional control</td></tr></table></section>
+        <section class="content-block" id="process"><h2>实现过程</h2><ol><li>标定云台中位、可动范围与舵机方向，加入软件限位保护。</li><li>采集摄像头画面并输出目标框中心，计算它相对图像中心的二维误差。</li><li>将像素误差映射为水平、俯仰控制量，通过串口发送给执行端。</li><li>加入死区、输出限幅和低通处理，逐步调整控制增益与采样频率。</li><li>记录丢失目标、快速运动和边缘位置下的系统行为。</li></ol></section>
+        <section class="content-block" id="problems"><h2>问题与解决方案</h2><h3>舵机抖动</h3><p>检测框本身存在微小波动。通过设置中心死区、平滑目标坐标并限制最小控制增量，降低无意义的频繁动作。</p><h3>过冲和追踪滞后</h3><p>降低比例增益并分开调试两个轴；测量视觉链路时延后，再确定合理的积分与微分项。</p><h3>目标暂时丢失</h3><p>引入短时保持策略，不立即回中；连续丢失超过阈值后再进入搜索或安全位置。</p><div class="callout"><strong>系统观察</strong>追踪效果不仅取决于检测精度。摄像头帧率、通信延迟、舵机死区与结构刚度同样决定闭环品质。</div></section>
+        <section class="content-block" id="media"><h2>图像 / 视频</h2><div class="media-placeholder placeholder-visual">PAN-TILT ASSEMBLY / REPLACE</div><p class="caption">Fig. 01 — 云台、摄像头与控制板整体结构</p><div class="media-placeholder placeholder-visual">TRACKING DEMO / REPLACE WITH EMBED</div><p class="caption">Video 01 — 目标移动时的实时追踪表现</p></section>
+        <section class="content-block"><h2>Repository</h2><a class="repo-link" href="https://github.com/your-username/pan-tilt-tracking" target="_blank" rel="noreferrer"><span>github.com/your-username/pan-tilt-tracking</span><span>Open ↗</span></a></section>
+        <section class="content-block" id="next"><h2>后续计划</h2><ul><li>用标定结果建立像素、视场角与舵机角度的明确映射。</li><li>比较传统检测器与轻量神经网络追踪器的端到端延迟。</li><li>加入目标重识别和丢失后的主动搜索。</li><li>迁移到 ROS2 节点并发布跟踪误差与云台状态。</li></ul></section>
+      </article>
+    </div>
+  </main><footer class="site-footer"><div class="container footer-wrap"><div class="footer-links"><a href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub ↗</a><a href="mailto:your-email@example.com">Email</a></div><p class="copyright">© <span data-year></span> Calvin Miller / 雲何.</p></div></footer>
+</body></html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Ubuntu 22.04 上 ROS2 与 Gazebo 仿真环境搭建记录。"><title>ROS2 + Gazebo Environment — Calvin Miller</title><link rel="stylesheet" href="../style.css"><script src="../script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a><header class="site-header"><div class="container nav-wrap"><a class="brand" href="../index.html"><span class="brand-mark">CM.</span><span class="brand-cn">雲何</span></a><button class="menu-toggle" type="button" aria-label="打开导航" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" aria-label="主导航"><a href="../index.html">Home</a><a href="../projects.html">Projects</a><a href="../notes.html">Notes</a><a href="../gallery.html">Gallery</a><a href="../interests.html">Interests</a><a href="../about.html">About</a></nav></div></header>
+  <main id="main">
+    <header class="project-hero"><div class="container"><a class="back-link" href="../projects.html">← Back to projects</a><p class="eyebrow">P — 04 / Simulation Infrastructure</p><h1>ROS2 + Gazebo Environment</h1><p class="project-summary">在 Ubuntu 22.04 上建立可重复的 ROS2 与 Gazebo 仿真环境，为机器人模型、传感器和控制算法提供统一实验基础。</p><div class="project-specs"><div class="spec"><span>Status</span><strong>Base environment</strong></div><div class="spec"><span>Year</span><strong>2026</strong></div><div class="spec"><span>Role</span><strong>Setup / Documentation</strong></div><div class="spec"><span>Stack</span><strong>Ubuntu · ROS2 · Gazebo</strong></div></div></div></header>
+    <div class="container project-body"><aside class="project-toc"><p>On this page</p><a href="#background">项目背景</a><a href="#environment">硬件 / 软件</a><a href="#process">实现过程</a><a href="#problems">问题与方案</a><a href="#media">图像 / 视频</a><a href="#next">后续计划</a></aside>
+      <article>
+        <section class="content-block" id="background"><h2>项目背景</h2><p>机器人项目在接入真实硬件前，需要一个可以低成本重复实验的环境。这个项目的重点不是完成一次安装，而是建立清晰、可复现的工作空间：版本对应明确、依赖来源可追踪、基础通信和仿真模型能够被验证。</p></section>
+        <section class="content-block" id="environment"><h2>硬件 / 软件环境</h2><table class="tech-table"><tr><th>Host OS</th><td>Ubuntu 22.04 LTS</td></tr><tr><th>Middleware</th><td>ROS2 Humble（占位，请按实际版本确认）</td></tr><tr><th>Simulator</th><td>Gazebo / Gazebo Classic（按实际组合替换）</td></tr><tr><th>Build</th><td>colcon · rosdep · CMake</td></tr><tr><th>Languages</th><td>Python · C++ · URDF / Xacro</td></tr></table></section>
+        <section class="content-block" id="process"><h2>实现过程</h2><ol><li>安装系统更新、区域设置和 ROS2 软件源，确认发行版与 Ubuntu 版本对应。</li><li>创建 colcon 工作空间，完成 publisher / subscriber 最小通信验证。</li><li>安装仿真桥接包，启动空世界并检查渲染与物理引擎。</li><li>加入基础 URDF / Xacro 模型、关节和传感器插件。</li><li>整理 setup 脚本、依赖清单与启动命令，保证新终端可重复加载。</li></ol></section>
+        <section class="content-block" id="problems"><h2>问题与解决方案</h2><h3>软件包版本或教程不对应</h3><p>以官方发行版文档为主，并在笔记中固定 Ubuntu、ROS2 与 Gazebo 的具体组合，避免混用不同年代的命令。</p><h3>模型或 mesh 无法加载</h3><p>逐项检查资源 URI、包安装路径和环境变量；先用最小几何体确认模型结构，再恢复外部资源。</p><h3>工作空间 source 顺序混乱</h3><p>明确系统环境和 overlay workspace 的加载顺序，不把失效路径长期写进 shell 配置。</p><div class="callout"><strong>复现要求</strong>每次修复都记录“症状、原因、验证命令”，而不仅留下最终可运行的一串命令。</div></section>
+        <section class="content-block" id="media"><h2>图像 / 视频</h2><div class="media-placeholder placeholder-visual">GAZEBO WORLD / REPLACE</div><p class="caption">Fig. 01 — Gazebo 仿真场景与机器人模型</p><div class="media-placeholder placeholder-visual">ROS GRAPH / REPLACE</div><p class="caption">Fig. 02 — 节点与话题关系记录</p></section>
+        <section class="content-block"><h2>Repository</h2><a class="repo-link" href="https://github.com/your-username/ros2-gazebo-environment" target="_blank" rel="noreferrer"><span>github.com/your-username/ros2-gazebo-environment</span><span>Open ↗</span></a></section>
+        <section class="content-block" id="next"><h2>后续计划</h2><ul><li>加入差速底盘、激光雷达与相机模型。</li><li>建立导航与 SLAM 的基础仿真场景。</li><li>使用容器或安装脚本提高跨设备复现能力。</li><li>将视觉云台项目拆分为 ROS2 节点接入仿真。</li></ul></section>
+      </article>
+    </div>
+  </main><footer class="site-footer"><div class="container footer-wrap"><div class="footer-links"><a href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub ↗</a><a href="mailto:your-email@example.com">Email</a></div><p class="copyright">© <span data-year></span> Calvin Miller / 雲何.</p></div></footer>
+</body></html>

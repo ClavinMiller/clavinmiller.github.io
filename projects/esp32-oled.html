@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ESP32 OLED Animation 项目工程记录。"><title>ESP32 OLED Animation — Calvin Miller</title>
+  <link rel="stylesheet" href="../style.css"><script src="../script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header"><div class="container nav-wrap"><a class="brand" href="../index.html"><span class="brand-mark">CM.</span><span class="brand-cn">雲何</span></a><button class="menu-toggle" type="button" aria-label="打开导航" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" aria-label="主导航"><a href="../index.html">Home</a><a href="../projects.html">Projects</a><a href="../notes.html">Notes</a><a href="../gallery.html">Gallery</a><a href="../interests.html">Interests</a><a href="../about.html">About</a></nav></div></header>
+  <main id="main">
+    <header class="project-hero"><div class="container"><a class="back-link" href="../projects.html">← Back to projects</a><p class="eyebrow">P — 01 / Embedded Display</p><h1>ESP32 OLED Animation</h1><p class="project-summary">基于 ESP32 和 SSD1306 OLED 的动画显示实验：在有限 SRAM、刷新带宽与处理时间内，建立轻量、稳定的帧播放流程。</p><div class="project-specs"><div class="spec"><span>Status</span><strong>Prototype</strong></div><div class="spec"><span>Year</span><strong>2026</strong></div><div class="spec"><span>Role</span><strong>Hardware / Firmware</strong></div><div class="spec"><span>Stack</span><strong>ESP32 · C++ · I²C</strong></div></div></div></header>
+    <div class="container project-body">
+      <aside class="project-toc"><p>On this page</p><a href="#background">项目背景</a><a href="#environment">硬件 / 软件</a><a href="#process">实现过程</a><a href="#problems">问题与方案</a><a href="#media">图像 / 视频</a><a href="#next">后续计划</a></aside>
+      <article>
+        <section class="content-block" id="background"><h2>项目背景</h2><p>这个项目从一块 128 × 64 单色 OLED 开始。目标并不只是“让图片动起来”，而是理解微控制器上的图形数据如何被编码、存储和发送，并在资源有限的条件下保持连贯显示。</p><p>它也是后续交互设备的基础实验：显示状态、表情、启动动画或传感器反馈，都需要一条可预测的渲染链路。</p></section>
+        <section class="content-block" id="environment"><h2>硬件 / 软件环境</h2><table class="tech-table"><tr><th>Controller</th><td>ESP32 development board（具体型号待补充）</td></tr><tr><th>Display</th><td>SSD1306 · 128 × 64 · monochrome OLED</td></tr><tr><th>Interface</th><td>I²C · address 0x3C（按实际模块修改）</td></tr><tr><th>Toolchain</th><td>PlatformIO / Arduino Framework</td></tr><tr><th>Libraries</th><td>Adafruit GFX + SSD1306（占位，可替换）</td></tr></table></section>
+        <section class="content-block" id="process"><h2>实现过程</h2><ol><li>完成供电、SDA / SCL 接线与 I²C 地址扫描，建立最小显示测试。</li><li>将原始动画拆分为适合单色屏幕的位图帧，并转换为程序可读取的字节数组。</li><li>用固定帧间隔组织播放循环，分离帧索引、绘制与刷新逻辑。</li><li>观察内存占用与刷新抖动，根据动画内容选择全帧或局部刷新。</li></ol><div class="callout"><strong>设计原则</strong>先保证时序稳定和数据可控，再增加帧数与视觉复杂度。</div></section>
+        <section class="content-block" id="problems"><h2>问题与解决方案</h2><h3>动画闪烁或节奏不均</h3><p>避免在循环中使用不可控的长阻塞操作；将帧间隔统一交给时间戳判断，并减少重复清屏。</p><h3>位图占用过多 SRAM</h3><p>将常量帧数据放入 Flash，并考虑关键帧、增量区域或程序化绘图，减少完整帧的重复数据。</p><h3>I²C 刷新成为瓶颈</h3><p>提高总线速率前先确认模块稳定性；对动画变化较小的区域尝试局部更新。</p></section>
+        <section class="content-block" id="media"><h2>图像 / 视频</h2><div class="media-placeholder placeholder-visual">PROJECT IMAGE / REPLACE</div><p class="caption">Fig. 01 — OLED 动画运行照片占位</p><div class="media-placeholder placeholder-visual">DEMO VIDEO / REPLACE WITH EMBED</div><p class="caption">Video 01 — 动画刷新效果演示占位</p></section>
+        <section class="content-block"><h2>Repository</h2><a class="repo-link" href="https://github.com/your-username/esp32-oled-animation" target="_blank" rel="noreferrer"><span>github.com/your-username/esp32-oled-animation</span><span>Open ↗</span></a></section>
+        <section class="content-block" id="next"><h2>后续计划</h2><ul><li>加入从 SD 卡或串口加载动画资源的方案。</li><li>建立帧数据转换脚本和统一资源格式。</li><li>测试 SPI OLED 与局部刷新策略的性能差异。</li><li>将显示模块接入传感器或机器人状态机。</li></ul></section>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container footer-wrap"><div class="footer-links"><a href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub ↗</a><a href="mailto:your-email@example.com">Email</a></div><p class="copyright">© <span data-year></span> Calvin Miller / 雲何.</p></div></footer>
+</body>
+</html>

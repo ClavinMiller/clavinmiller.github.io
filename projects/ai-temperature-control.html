@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="基于人工智能的罐式煅烧炉控温系统研究项目记录。"><title>AI-based Temperature Control — Calvin Miller</title><link rel="stylesheet" href="../style.css"><script src="../script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a><header class="site-header"><div class="container nav-wrap"><a class="brand" href="../index.html"><span class="brand-mark">CM.</span><span class="brand-cn">雲何</span></a><button class="menu-toggle" type="button" aria-label="打开导航" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" aria-label="主导航"><a href="../index.html">Home</a><a href="../projects.html">Projects</a><a href="../notes.html">Notes</a><a href="../gallery.html">Gallery</a><a href="../interests.html">Interests</a><a href="../about.html">About</a></nav></div></header>
+  <main id="main">
+    <header class="project-hero"><div class="container"><a class="back-link" href="../projects.html">← Back to projects</a><p class="eyebrow">P — 05 / Industrial AI Control</p><h1>AI-based Temperature Control System</h1><p class="project-summary">面向罐式煅烧炉热工过程，研究数据驱动的温度预测与控制策略，目标是在安全边界内提高温控稳定性与运行效率。</p><div class="project-specs"><div class="spec"><span>Status</span><strong>Research</strong></div><div class="spec"><span>Year</span><strong>2026</strong></div><div class="spec"><span>Domain</span><strong>Industrial Process</strong></div><div class="spec"><span>Stack</span><strong>Python · ML · Control</strong></div></div></div></header>
+    <div class="container project-body"><aside class="project-toc"><p>On this page</p><a href="#background">项目背景</a><a href="#environment">环境 / 数据</a><a href="#process">实现过程</a><a href="#problems">问题与方案</a><a href="#media">图像 / 视频</a><a href="#next">后续计划</a></aside>
+      <article>
+        <section class="content-block" id="background"><h2>项目背景</h2><p>罐式煅烧炉具有明显的热惯性、滞后、扰动和工况变化。传统控制方法可靠，但在多变量耦合与变化工况下存在进一步优化空间。本研究尝试用历史过程数据建立温度动态模型，并探索 AI 模型怎样以辅助预测、参数整定或上层优化的方式进入控制系统。</p><p>研究首先关注安全、数据可信度和可解释性，不以黑箱模型直接替代成熟底层回路。</p></section>
+        <section class="content-block" id="environment"><h2>环境 / 数据</h2><table class="tech-table"><tr><th>Process</th><td>罐式煅烧炉温度控制（具体设备参数待补充）</td></tr><tr><th>Signals</th><td>温度、燃料 / 风量、负荷、环境与操作量</td></tr><tr><th>Data</th><td>历史时序数据 + 运行工况标签</td></tr><tr><th>Methods</th><td>System identification · time-series ML · MPC exploration</td></tr><tr><th>Tools</th><td>Python · pandas · scikit-learn / PyTorch（占位）</td></tr></table></section>
+        <section class="content-block" id="process"><h2>实现过程</h2><ol><li>理解工艺流程、测点含义与现有控制结构，确定控制目标和安全约束。</li><li>对历史数据进行时间对齐、异常值识别、缺失处理与工况分段。</li><li>分析输入输出之间的延迟、相关性和动态响应，建立基准模型。</li><li>比较传统辨识模型与数据驱动模型的多步温度预测能力。</li><li>在离线仿真中评估辅助设定值或预测控制策略，不直接接管现场回路。</li><li>采用滚动验证与跨工况测试，记录误差、鲁棒性和失效情形。</li></ol></section>
+        <section class="content-block" id="problems"><h2>问题与解决方案</h2><h3>工业数据质量不一致</h3><p>保留清洗规则和原始数据血缘；将传感器故障、检修、停炉等时段单独标注，避免模型从无效数据学习规律。</p><h3>强滞后与工况漂移</h3><p>显式加入历史窗口和工况变量，并使用按时间顺序的验证方式，避免随机切分造成过度乐观的结果。</p><h3>预测精度不等于控制收益</h3><p>除预测误差外，还需评估温度波动、超调、能耗、执行器动作频率和约束违反次数。</p><div class="callout"><strong>工程边界</strong>AI 层输出必须经过约束检查和人工可理解的安全逻辑；现场应用需要分阶段验证与可靠回退方案。</div></section>
+        <section class="content-block" id="media"><h2>图像 / 视频</h2><div class="media-placeholder placeholder-visual">PROCESS DIAGRAM / REPLACE</div><p class="caption">Fig. 01 — 工艺流程与关键测点示意占位</p><div class="media-placeholder placeholder-visual">RESULT CHART / REPLACE</div><p class="caption">Fig. 02 — 预测温度、实际温度与控制量对比占位</p></section>
+        <section class="content-block"><h2>Repository</h2><a class="repo-link" href="https://github.com/your-username/ai-temperature-control" target="_blank" rel="noreferrer"><span>github.com/your-username/ai-temperature-control</span><span>Private / placeholder ↗</span></a></section>
+        <section class="content-block" id="next"><h2>后续计划</h2><ul><li>补充工艺先验与可解释特征，建立清晰的模型基线。</li><li>研究不同工况下的模型切换或在线适应。</li><li>构建带约束的数字仿真环境，评估控制收益与风险。</li><li>形成从数据治理、离线验证到现场影子运行的分阶段方案。</li></ul></section>
+      </article>
+    </div>
+  </main><footer class="site-footer"><div class="container footer-wrap"><div class="footer-links"><a href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub ↗</a><a href="mailto:your-email@example.com">Email</a></div><p class="copyright">© <span data-year></span> Calvin Miller / 雲何.</p></div></footer>
+</body></html>
